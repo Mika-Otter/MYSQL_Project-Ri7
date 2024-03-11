@@ -1,0 +1,126 @@
+@font-face {
+    font-family: "Poppins";
+    src: url("Poppins-Medium.ttf");
+}
+
+:root {
+    --bg-color: #080606;
+    --primary-color: #ff6600;
+    --text-color: #f8f7f1;
+    --fontSizeSmall: clamp(0.5rem, 0.2rem + 0.8vw, 1rem);
+    --fontSizeMedium: clamp(1.25rem, 0.7292rem + 1.6vw, 2.8rem);
+    --fontSizeBig: clamp(1.5rem, 0.9rem + 2vw, 3.5rem);
+    --square: 1vw;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+    background-color: var(--bg-color);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main > h1 {
+    font-size: var(--fontSizeBig);
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.addUser {
+    display: flex;
+    justify-content: center;
+}
+
+#addUser__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: calc(var(--square) * 2);
+}
+
+#addUser__form > input {
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    height: 3vh;
+    padding-left: 10px;
+    font-size: var(--fontSizeSmall);
+}
+
+#addUser__form > input:focus {
+    border: 2px solid var(--primary-color);
+    outline: none;
+}
+
+#addBtn {
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    width: 7vw;
+    height: 3vh;
+    border-style: none;
+}
+
+/*________________________________TABLE USER______________________________________*/
+
+.listUser {
+    width: 80%;
+    color: var(--text-color);
+}
+
+table {
+    width: 100%;
+    color: var(--text-color);
+    border-collapse: collapse;
+    text-transform: uppercase;
+    font-size: var(--fontSizeSmall);
+}
+
+th {
+    border: 1px solid var(--text-color);
+}
+
+#postCode {
+    width: 20%;
+}
+
+#email {
+    width: 35%;
+}
+
+/*_____________________________PROMPT_______________________________________________*/
+
+.toast {
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0 0 0;
+}
+
+.toast-wrapper {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.success {
+    background-color: green;
+}
+
+.error {
+    background-color: #c03939;
+}
+
+.errorLine {
+    background-color: #eccfcf;
+}
