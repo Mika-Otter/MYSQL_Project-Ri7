@@ -1,9 +1,10 @@
-<?php 
+<!-- <?php 
  $servername = "localhost";
  $username = "root";
  $password = "";
  $dbName = "course_sql";
  $prompt = [];
+ $sql = "SELECT * FROM users";
 
  try{
     $db = new PDO("mysql:host=$servername;dbname=$dbName", $username, $password);
@@ -57,7 +58,11 @@ return ["success"=>"Utilisateur bien créé"];
     return count($prompts["error"]) > 0 ? $prompts : $goodFields;
 }
 
- ?>
+ ?> -->
+
+<?php 
+require_once 'includes/database.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,6 +73,8 @@ return ["success"=>"Utilisateur bien créé"];
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
+
+   
         <main>
             <h1>Liste d'utilisateurs</h1>
             <section class="addUser">
