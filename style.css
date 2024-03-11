@@ -43,7 +43,6 @@ main > h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 9px;
     margin-bottom: calc(var(--square) * 2);
 }
 
@@ -68,6 +67,7 @@ main > h1 {
     text-transform: uppercase;
     width: 7vw;
     height: 3vh;
+    margin-left: var(--square);
     border-style: none;
 }
 
@@ -87,6 +87,8 @@ table {
 }
 
 th {
+    text-align: left;
+    padding-left: 20px;
     border: 1px solid var(--text-color);
 }
 
@@ -123,4 +125,19 @@ th {
 
 .errorLine {
     background-color: #eccfcf;
+}
+
+/*__________________________________UPDATE____________________________________*/
+
+.update__input {
+    background: transparent;
+    color: var(--text-color);
+    height: 3vh;
+    padding-left: 10px;
+    font-size: var(--fontSizeSmall);
+}
+
+.update__input:focus {
+    border: 2px solid var(--primary-color);
+    outline: none;
 }

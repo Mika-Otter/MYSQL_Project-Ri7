@@ -1,64 +1,4 @@
-<!-- <?php 
- $servername = "localhost";
- $username = "root";
- $password = "";
- $dbName = "course_sql";
- $prompt = [];
- $sql = "SELECT * FROM users";
 
- try{
-    $db = new PDO("mysql:host=$servername;dbname=$dbName", $username, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $prompt = ["succes" => "Connexion réussie"];
-
-    if(isset($_POST["create"])) {
-       $prompt = createUser($db);
-    }
- } catch(PDOException $e){
-        $prompt = ["error" => $e->getMessage()];
- }
-
- function createUser($db) {
-    $fields = verifyFields($_POST);
-    if(isset($fields["error"])) return $fields;
-    $createSQL = $db->prepare(
-        "INSERT INTO user(firstName, lastName, mail, postCode) VALUES(:firstName, :lastName, :mail, :postCode" 
-    );
-    $createSQL->execute([":lastName"=>$fields["lastName"],
-    ":firstName"=>$fields["firstName"],
-    ":mail"=>$fields["mail"],
-    ":codePostal"=>$fields["postCode"]]);
-return ["success"=>"Utilisateur bien créé"];
- }
-
- function verifyFields($fields){
-    $goodFields = [];
-    $prompts = ["error"=>[]];
-    foreach($fields as $field=>$value){
-        switch($field){
-            case "lastName" :
-                $regex = "/^[a-z\-]+$/i";
-                if(!preg_match($regex,$value)) array_push($prompts["error"],"Mauvais nom");
-                break;
-            case "firstName" :
-                $regex = "/^[a-z\-]+$/i";
-                if(!preg_match($regex,$value)) array_push($prompts["error"],"Mauvais prénom");
-                break;
-            case "mail" :
-                $regex = "/^[A-zÀ-ÿ0-9]*@[a-z]*\.[a-z]{2,5}$/";
-                if(!preg_match($regex,$value)) array_push($prompts["error"],"Veuillez rentrer un email valide");
-                break;
-            case "postCode" :
-                $regex = "/^[0-9]{5}$/";
-                if(!preg_match($regex,$value)) array_push($prompts["error"],"Mauvais code postal, veuillez rentrer 5 chiffres");
-                break;
-        }
-        $goodFields[$field] = htmlspecialchars($value);
-    }
-    return count($prompts["error"]) > 0 ? $prompts : $goodFields;
-}
-
- ?> -->
 
 <?php 
 require_once 'includes/database.php';
@@ -94,6 +34,33 @@ require_once 'includes/database.php';
                         <th id="email">E-mail</th>
                         <th id="postCode">Code Postal</th>
                     </tr>
+                    <?php 
+                      $update = isset($_POST["update"]) ? $_POST["update"] : -1;
+                      $confirm = isset($_POST["confirm"]) && isset($prompt["error"]) ? $_POST["confirm"] : -1;
+                        foreach($tableauRequete as $entry){ ?>
+                            <tr>
+                                <form method="post" class="update__form">
+                                    <?php
+                                      if($update != $entry["ID"]) : ?>
+                                        <td><?php echo $entry["lastName"]; ?></td>
+                                        <td><?php echo $entry["firstName"]; ?></td>
+                                        <td><?php echo $entry["mail"]; ?></td>
+                                        <td><?php echo $entry["postCode"]; ?></td>
+                                        <td>
+                                            <button type="submit" name="update" value="<?= $entry["ID"] ?>">Update</button>
+                                <?php else : ?>
+                                    <td><input type="text" name="nom" value="<?= $entry["lastName"]; ?>" class="update__input"/></td>
+                                    <td><input type="text" name="prenom" value="<?= $entry["firstName"]; ?>" class="update__input"/></td>
+                                    <td><input type="text" name="mail" value="<?= $entry["mail"]; ?>" class="update__input"/></td>
+                                    <td><input type="text" name="codePostal" value="<?= $entry["postCode"]; ?>" class="update__input"/></td>
+                                    <td>
+                                        <button type="submit" id="confirm" name="confirm" value="<?= $entry["ID"] ?>">Confirm</button>
+                                </td>
+                                        <?php endif; ?>
+                                    </form>
+
+                            </tr>
+                    <?php } ?>
                 </table>
             </section>
             <?php 
