@@ -16,7 +16,7 @@ include 'includes/database.php';
 
    
         <main>
-            <h1>Liste d'utilisateurs</h1>
+            <h1>user_management</h1>
             <section class="addUser">
                 <form method="post" id="addUser__form">
                     <input type="text" name="lastName" placeholder="Nom" />
@@ -47,16 +47,23 @@ include 'includes/database.php';
                                         <td><?php echo $entry["mail"]; ?></td>
                                         <td><?php echo $entry["postCode"]; ?></td>
                                         <td>
-                                            <button type="submit" name="update" value="<?= $entry["ID"] ?>">Update</button>
+                                        <div class="btn__ctn">
+                                            <button type="submit" name="updateBtn" id="updateBtn" value="<?= $entry["ID"] ?>">Update</button>
+                                            <button type="submit" id="deleteBtn" name="delete" value="<?= $entry["ID"] ?>">X</button>
+                                        </div>
                                 <?php else : ?>
-                                    <td><input type="text" name="nom" value="<?= $entry["lastName"]; ?>" class="update__input"/></td>
-                                    <td><input type="text" name="prenom" value="<?= $entry["firstName"]; ?>" class="update__input"/></td>
+                                    <td><input type="text" name="lastName" value="<?= $entry["lastName"]; ?>" class="update__input"/></td>
+                                    <td><input type="text" name="firstName" value="<?= $entry["firstName"]; ?>" class="update__input"/></td>
                                     <td><input type="text" name="mail" value="<?= $entry["mail"]; ?>" class="update__input"/></td>
-                                    <td><input type="text" name="codePostal" value="<?= $entry["postCode"]; ?>" class="update__input"/></td>
+                                    <td><input type="text" name="postCode" value="<?= $entry["postCode"]; ?>" class="update__input"/></td>
                                     <td>
-                                        <button type="submit" id="confirm" name="confirm" value="<?= $entry["ID"] ?>">Confirm</button>
+                                    <div class="btn__ctn">
+                                        <button type="submit" id="confirmBtn" name="confirm" value="<?= $entry["ID"] ?>">Confirm</button>
+                                        <button type="submit" id="deleteBtn" name="delete" value="<?= $entry["ID"] ?>">X</button>
+                                    </div>
                                 </td>
                                         <?php endif; ?>
+                                
                                     </form>
 
                             </tr>
