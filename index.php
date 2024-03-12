@@ -1,7 +1,7 @@
 
 
 <?php 
-require_once 'includes/database.php';
+include 'includes/database.php';
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ require_once 'includes/database.php';
                     <?php 
                       $update = isset($_POST["update"]) ? $_POST["update"] : -1;
                       $confirm = isset($_POST["confirm"]) && isset($prompt["error"]) ? $_POST["confirm"] : -1;
-                        foreach($tableauRequete as $entry){ ?>
+                        foreach($tabRequest as $entry){ ?>
                             <tr>
                                 <form method="post" class="update__form">
                                     <?php

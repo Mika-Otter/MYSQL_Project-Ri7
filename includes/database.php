@@ -17,28 +17,24 @@ try{
 
     $sql = $db -> prepare("SELECT * FROM user");
     $sql->execute();
-    $tableauRequete = $sql -> fetchAll();
+    $tabRequest = $sql -> fetchAll();
+
     $db->commit();
 } catch(PDOException $e){
         $prompt = ["error" => $e->getMessage()];
+        echo $e->getMessage();
  }
 
  function createUser($db) {
     $fields = verifyFields($_POST);
         if(isset($fields["error"])) return $fields;
-    $createSQL = $db -> prepare("INSERT INTO user VALUES(:firstName, :lastName, :mail, :postCode)");
+    $createSQL = $db -> prepare("INSERT INTO user(firstName, lastName, mail, postCode) VALUES(:firstName, :lastName, :mail, :postCode)");
     $createSQL -> execute([
         ':firstName' => $fields['firstName'],
         ':lastName' => $fields['lastName'],
         ':mail' => $fields['mail'],
         ':postCode' => $fields['postCode']
     ]);
-    
-    $db->commit();
-
-    $sql = $db->prepare("SELECT * FROM user");
-    $sql->execute();
-    return ["success" => "User correctly added!", "tableauRequete" => $sql->fetchAll()];
 }
 
 function verifyFields($fields){
